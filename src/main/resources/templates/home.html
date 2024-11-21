@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Store - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .title {
+            color: #363636;
+        }
+        .card {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .card-image img {
+            border-radius: 8px 8px 0 0;
+        }
+        .card-footer {
+            border-top: 1px solid #eee;
+        }
+        .button.is-link {
+            background-color: #3273dc;
+            color: white;
+        }
+        .table thead {
+            background-color: #3273dc;
+            color: white;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <section class="section">
+        <h1 class="title has-text-centered">Book Store</h1>
+        <h2 class="subtitle has-text-centered">Find Your Next Great Read</h2>
+
+        <!-- Display list of books -->
+        <div class="columns is-multiline">
+            <div class="column is-4" th:each="book : ${availableBooks}">
+                <div class="card">
+                    <div class="card-image">
+                        <!-- Book image -->
+                        <figure class="image is-4by3">
+                            <img th:src="${book.imageUrl}" alt="Book Image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <p class="title is-5" th:text="${book.title}">Book Title</p>
+                        <p class="subtitle is-6" th:text="${book.author}">Author</p>
+                        <p><strong>Price:</strong> <span th:text="${book.price}"></span> USD</p>
+                    </div>
+                    <footer class="card-footer">
+                        <form th:action="@{/add-to-cart}" method="post" class="card-footer-item">
+                            <input type="hidden" name="title" th:value="${book.title}"/>
+                            <button type="submit" class="button is-link is-fullwidth">Add to Cart</button>
+                        </form>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display cart summary -->
+        <div class="section">
+            <h2 class="subtitle">Your Cart</h2>
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${cartBooks}">
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.price}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="has-text-right"><strong>Total:</strong> <span th:text="${total}"></span> USD</p>
+        </div>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Cart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+<div class="container">
+  <section class="section">
+    <h1 class="title">Book Store</h1>
+    <div class="columns">
+      <!-- Danh sách sách có sẵn -->
+      <div class="column">
+        <h2 class="subtitle">Available Books</h2>
+        <table class="table is-fullwidth">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="book : ${availableBooks}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.price}"></td>
+            <td>
+              <form th:action="@{/add-to-cart}" method="post">
+                <input type="hidden" name="title" th:value="${book.title}"/>
+                <button type="submit" class="button is-link">Add to Cart</button>
+              </form>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Danh sách sách trong giỏ hàng -->
+      <div class="column">
+        <h2 class="subtitle">Cart</h2>
+        <table class="table is-fullwidth">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="book : ${cartBooks}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.price}"></td>
+          </tr>
+          </tbody>
+        </table>
+        <p><strong>Total:</strong> <span th:text="${total}"></span> USD</p>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>
