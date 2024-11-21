@@ -51,27 +51,6 @@ public class CartController {
     // Phương thức xử lý thông tin thanh toán
     @PostMapping("/processPayment")
     public String processPayment() {
-        return "paymentConfirmation"; // Trả về trang payment.html
+        return "paymentConfirmation"; // Trả về trang paymentConfirmation.html
     }
-    // public String processPayment(@RequestParam String name,
-    //                               @RequestParam String phone,
-    //                               @RequestParam String address,
-    //                               @RequestParam String paymentMethod,
-    //                               @RequestParam String deliveryMethod,
-    //                               @RequestParam double totalAmount,
-    //                               Model model) {
-    //     // Xử lý thông tin thanh toán
-    //     Payment payment = new Payment();
-    //     payment.setName(name);
-    //     payment.setPhoneNumber(phone);
-    //     payment.setAddress(address);
-    //     payment.setPaymentMethod(paymentMethod);
-    //     payment.setDeliveryMethod(deliveryMethod);
-    //     payment.setTotalAmount(totalAmount);
-    //     // Thêm logic xử lý thanh toán ở đây
-    //     model.addAttribute("payment", payment);
-    //     return "paymentConfirmation"; // Chuyển đến trang xác nhận thanh toán
-    // }
-
-
 }
