@@ -5,6 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -14,9 +19,10 @@ public class CartController {
     private Cart cart = new Cart();
 
     private List<Book> availableBooks = List.of(
-            new Book("The Catcher in the Rye", "J.D. Salinger", 10.99, "/images/img.png"),
-            new Book("To Kill a Mockingbird", "Harper Lee", 12.99, "/images/img_1.png"),
-            new Book("1984", "George Orwell", 15.99, "/images/img_3.png")
+            new Book("Hãy nhớ lấy tên anh", "Trần Hồng Quên", 23.45, "/images/img-4.jpg"),
+            new Book("Nội giới và ngoại giới", "Phi Văn Đài", 231.42, "/images/img-5.png"),
+            new Book("Đắc nhân tâm", "Lê Tùng Anh", 21.42, "/images/img-6.png")
+
     );
 
     @GetMapping("/")
@@ -35,4 +41,37 @@ public class CartController {
                 .ifPresent(cart::addBook);
         return "redirect:/";
     }
+
+    // Route để hiển thị trang thanh toán
+    @GetMapping("/payment")
+    public String showPaymentForm() {
+        return "payment"; // Trả về trang payment.html
+    }
+
+    // Phương thức xử lý thông tin thanh toán
+    @PostMapping("/processPayment")
+    public String processPayment() {
+        return "paymentConfirmation"; // Trả về trang payment.html
+    }
+    // public String processPayment(@RequestParam String name,
+    //                               @RequestParam String phone,
+    //                               @RequestParam String address,
+    //                               @RequestParam String paymentMethod,
+    //                               @RequestParam String deliveryMethod,
+    //                               @RequestParam double totalAmount,
+    //                               Model model) {
+    //     // Xử lý thông tin thanh toán
+    //     Payment payment = new Payment();
+    //     payment.setName(name);
+    //     payment.setPhoneNumber(phone);
+    //     payment.setAddress(address);
+    //     payment.setPaymentMethod(paymentMethod);
+    //     payment.setDeliveryMethod(deliveryMethod);
+    //     payment.setTotalAmount(totalAmount);
+    //     // Thêm logic xử lý thanh toán ở đây
+    //     model.addAttribute("payment", payment);
+    //     return "paymentConfirmation"; // Chuyển đến trang xác nhận thanh toán
+    // }
+
+
 }
